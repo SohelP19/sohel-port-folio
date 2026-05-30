@@ -132,7 +132,9 @@
 
 @layer utilities {
   .bg-hero-gradient { background-image: var(--gradient-hero); }
+  .bg-hero-surface { background-color: var(--surface-hero); }
   .bg-primary-gradient { background-image: var(--gradient-primary); }
+  .bg-portrait-gradient { background-image: var(--gradient-portrait); }
   .text-gradient {
     background-image: var(--gradient-text);
     -webkit-background-clip: text;
