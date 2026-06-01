@@ -44,36 +44,44 @@ export function Projects() {
         {projects.map(({ icon: Icon, ...p }) => (
           <article
             key={p.name}
-            className="group relative flex flex-col rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant"
+            className="group relative flex flex-col rounded-2xl border border-border bg-card overflow-hidden shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant"
           >
-            <div className="h-12 w-12 rounded-xl bg-primary-gradient flex items-center justify-center text-primary-foreground mb-5">
-              <Icon className="h-6 w-6" />
-            </div>
-            <h3 className="font-display text-lg font-semibold">{p.name}</h3>
-            <p className="text-xs font-medium text-primary mt-0.5">{p.tagline}</p>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-            <p className="mt-3 text-sm font-medium text-foreground/90">{p.achievement}</p>
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {p.tags.map((t) => (
-                <span
-                  key={t}
-                  className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-accent text-accent-foreground"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {p.href && (
-              <div className="mt-6 pt-4 border-t border-border">
-                <Button asChild variant="ghost" size="sm" className="px-0 hover:bg-transparent">
-                  <a href={p.href} target="_blank" rel="noreferrer noopener" className="text-primary">
-                    Visit live demo <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                  </a>
-                </Button>
+            {/* Gradient header band */}
+            <div className="relative h-28 bg-portrait-gradient overflow-hidden">
+              <div aria-hidden className="absolute inset-0 bg-grid opacity-30" />
+              <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/15 blur-2xl" />
+              <div className="absolute -bottom-6 left-6 h-14 w-14 rounded-2xl bg-card border border-border flex items-center justify-center shadow-card">
+                <Icon className="h-6 w-6 text-primary" />
               </div>
-            )}
+            </div>
+
+            <div className="flex flex-col flex-1 p-6 pt-10">
+              <h3 className="font-display text-lg font-semibold">{p.name}</h3>
+              <p className="text-xs font-medium text-primary mt-0.5">{p.tagline}</p>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+              <p className="mt-3 text-sm font-medium text-foreground/90">{p.achievement}</p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-accent/15 text-accent border border-accent/20"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {p.href && (
+                <div className="mt-auto pt-5">
+                  <Button asChild variant="ghost" size="sm" className="px-0 hover:bg-transparent">
+                    <a href={p.href} target="_blank" rel="noreferrer noopener" className="text-primary">
+                      Visit live demo <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                    </a>
+                  </Button>
+                </div>
+              )}
+            </div>
           </article>
         ))}
       </div>

@@ -32,19 +32,19 @@ export function Skills() {
           <h3 className="font-display text-lg font-semibold mb-5">Technical</h3>
           <div className="space-y-4">
             {technical.map(({ icon: Icon, name, level }) => (
-              <div key={name} className="rounded-xl border border-border bg-card p-4 shadow-card">
+              <div key={name} className="group rounded-xl border border-border bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-elegant">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
-                    <span className="h-9 w-9 rounded-lg bg-accent flex items-center justify-center text-accent-foreground">
+                    <span className="h-9 w-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center transition-transform group-hover:scale-110">
                       <Icon className="h-4 w-4" />
                     </span>
                     <span className="font-medium text-sm">{name}</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">{level}%</span>
+                  <span className="text-xs font-semibold text-primary tabular-nums">{level}%</span>
                 </div>
-                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
                   <div
-                    className="h-full bg-primary-gradient transition-all duration-700"
+                    className="h-full rounded-full bg-primary-gradient transition-all duration-700"
                     style={{ width: `${level}%` }}
                   />
                 </div>
