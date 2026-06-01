@@ -33,8 +33,28 @@ const marquee = [
 ];
 
 export function Hero() {
+  const { src: profile, update, reset } = useProfileImage();
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const onPick = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please choose an image file.");
+      return;
+    }
+    if (file.size > 4 * 1024 * 1024) {
+      toast.error("Image must be under 4MB.");
+      return;
+    }
+    await update(file);
+    toast.success("Profile photo updated");
+    e.target.value = "";
+  };
+
   return (
-    <section id="home" className="relative pt-28 pb-10 lg:pt-32 lg:pb-16 overflow-hidden">
+    <section id="home" aria-label="Introduction" className="relative pt-28 pb-10 lg:pt-32 lg:pb-16 overflow-hidden">
+
       {/* Ambient background blobs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
