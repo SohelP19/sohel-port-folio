@@ -1,4 +1,4 @@
-import { ArrowUpRight, Atom, Code2, Lightbulb, Search, Trophy } from "lucide-react";
+import { ArrowUpRight, Atom, Code2, Lightbulb, Search, Sparkles, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profile from "@/assets/profile.jpg";
 
@@ -23,15 +23,50 @@ const roles = [
   },
 ];
 
+const marquee = [
+  "C++", "C", "Operating Systems", "Data Structures", "Algorithms",
+  "SEO", "UI / UX", "Leadership", "Public Speaking", "Research",
+  "NASA Space Apps", "MillionX Finalist", "Hult Prize",
+];
+
 export function Hero() {
   return (
-    <section id="home" className="relative pt-28 pb-10 lg:pt-32 lg:pb-16">
+    <section id="home" className="relative pt-28 pb-10 lg:pt-32 lg:pb-16 overflow-hidden">
+      {/* Ambient background blobs */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="absolute -top-24 -left-20 h-[420px] w-[420px] rounded-full opacity-40 blur-3xl animate-blob"
+          style={{ background: "radial-gradient(circle, color-mix(in oklab, var(--primary) 55%, transparent), transparent 70%)" }}
+        />
+        <div
+          className="absolute top-1/3 -right-24 h-[480px] w-[480px] rounded-full opacity-35 blur-3xl animate-blob"
+          style={{ background: "radial-gradient(circle, color-mix(in oklab, var(--accent) 55%, transparent), transparent 70%)", animationDelay: "-6s" }}
+        />
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Hero card */}
         <div className="relative overflow-hidden rounded-[2rem] bg-hero-surface border border-border px-6 sm:px-10 lg:px-16 pt-12 lg:pt-16 pb-10 lg:pb-12 shadow-card">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+          {/* Decorative grid + radial fade */}
+          <div aria-hidden className="absolute inset-0 bg-grid mask-radial-fade opacity-60" />
+          <div
+            aria-hidden
+            className="absolute -bottom-32 -right-24 h-72 w-72 rounded-full opacity-50 blur-3xl"
+            style={{ background: "radial-gradient(circle, color-mix(in oklab, var(--primary) 50%, transparent), transparent 70%)" }}
+          />
+
+          <div className="relative grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
             {/* Left */}
             <div className="space-y-7 animate-fade-up relative z-10">
+              {/* Available pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 backdrop-blur px-3 py-1.5 text-xs font-medium shadow-card">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                <span className="text-muted-foreground">Available for opportunities</span>
+              </div>
+
               <h1 className="font-display font-bold leading-[1.02] tracking-tight text-foreground text-5xl sm:text-6xl lg:text-7xl">
                 Hi! I Am
                 <br />
@@ -50,9 +85,12 @@ export function Hero() {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-primary text-primary-foreground shadow-elegant hover:opacity-90 rounded-xl px-7 h-12"
+                  className="group bg-primary-gradient text-primary-foreground shadow-elegant hover:opacity-95 rounded-xl px-7 h-12"
                 >
-                  <a href="#contact">Hire Me</a>
+                  <a href="#contact">
+                    Hire Me
+                    <ArrowUpRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
                 </Button>
                 <Button
                   asChild
@@ -77,11 +115,21 @@ export function Hero() {
 
             {/* Right: portrait with gradient shape */}
             <div className="relative h-[460px] sm:h-[520px] lg:h-[560px]">
+              {/* slow rotating dotted ring */}
+              <div
+                aria-hidden
+                className="absolute right-8 top-4 h-32 w-32 rounded-full border-2 border-dashed border-primary/40 animate-spin-slow"
+              />
               {/* angular gradient backdrop */}
               <div
                 className="absolute right-2 sm:right-6 top-6 bottom-12 w-[78%] sm:w-[80%] bg-portrait-gradient shadow-elegant"
                 style={{ clipPath: "polygon(8% 0, 100% 0, 92% 100%, 0 100%)" }}
                 aria-hidden
+              />
+              {/* dotted pattern on backdrop */}
+              <div
+                aria-hidden
+                className="absolute right-6 top-10 h-24 w-24 bg-dots opacity-40"
               />
               {/* portrait */}
               <img
@@ -104,7 +152,7 @@ export function Hero() {
 
               {/* floating award card */}
               <div className="absolute right-0 top-6 bg-card border border-border rounded-xl px-4 py-3 shadow-card flex items-center gap-3 max-w-[180px]">
-                <div className="h-10 w-10 rounded-lg bg-primary-gradient text-primary-foreground flex items-center justify-center">
+                <div className="relative h-10 w-10 rounded-lg bg-primary-gradient text-primary-foreground flex items-center justify-center animate-pulse-ring">
                   <Trophy className="h-5 w-5" />
                 </div>
                 <p className="text-xs font-semibold leading-tight">
@@ -113,15 +161,27 @@ export function Hero() {
                   Global Selectee
                 </p>
               </div>
+
+              {/* bottom-left mini badge */}
+              <div className="absolute left-0 bottom-2 bg-card/90 backdrop-blur border border-border rounded-xl px-3 py-2 shadow-card flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <p className="text-[11px] font-semibold leading-tight">
+                  MillionX BD
+                  <br />
+                  <span className="text-muted-foreground font-medium">Finalist · 17th</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Role strip */}
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
-          <div className="rounded-2xl bg-accent text-accent-foreground p-6 flex flex-col justify-between min-h-[160px] shadow-card">
-            <div className="font-display text-5xl font-bold leading-none">3+</div>
-            <p className="text-sm font-medium mt-4 opacity-90">
+          <div className="relative overflow-hidden rounded-2xl bg-accent text-accent-foreground p-6 flex flex-col justify-between min-h-[160px] shadow-card">
+            <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute right-4 top-4 h-2 w-2 rounded-full bg-white/70" />
+            <div className="font-display text-5xl font-bold leading-none relative">3+</div>
+            <p className="text-sm font-medium mt-4 opacity-90 relative">
               Years Building
               <br />&amp; Leading
             </p>
@@ -129,21 +189,35 @@ export function Hero() {
           {roles.map(({ icon: Icon, title, text, tint }) => (
             <div
               key={title}
-              className="rounded-2xl bg-card border border-border p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant flex flex-col"
+              className="group rounded-2xl bg-card border border-border p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant flex flex-col"
             >
               <div
-                className="h-11 w-11 rounded-xl flex items-center justify-center mb-4"
+                className="h-11 w-11 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
                 style={{ background: `color-mix(in oklab, ${tint} 25%, transparent)`, color: tint }}
               >
                 <Icon className="h-5 w-5" />
               </div>
               <h3 className="font-semibold text-base flex items-center gap-1.5">
                 {title}
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </h3>
               <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{text}</p>
             </div>
           ))}
+        </div>
+
+        {/* Tech marquee */}
+        <div className="mt-12 marquee-mask overflow-hidden">
+          <div className="flex w-max gap-3 animate-marquee">
+            {[...marquee, ...marquee].map((item, i) => (
+              <span
+                key={i}
+                className="shrink-0 rounded-full border border-border bg-card px-4 py-2 text-xs font-medium text-muted-foreground shadow-card"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
