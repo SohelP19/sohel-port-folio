@@ -1,6 +1,9 @@
-import { ArrowUpRight, Atom, Code2, Lightbulb, Search, Sparkles, Trophy } from "lucide-react";
+import { ArrowUpRight, Atom, Camera, Code2, Lightbulb, RotateCcw, Search, Sparkles, Trophy } from "lucide-react";
+import { useRef } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import profile from "@/assets/profile.jpg";
+import { useProfileImage } from "@/hooks/use-profile-image";
+
 
 const roles = [
   {
@@ -30,8 +33,28 @@ const marquee = [
 ];
 
 export function Hero() {
+  const { src: profile, update, reset } = useProfileImage();
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const onPick = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please choose an image file.");
+      return;
+    }
+    if (file.size > 4 * 1024 * 1024) {
+      toast.error("Image must be under 4MB.");
+      return;
+    }
+    await update(file);
+    toast.success("Profile photo updated");
+    e.target.value = "";
+  };
+
   return (
-    <section id="home" className="relative pt-28 pb-10 lg:pt-32 lg:pb-16 overflow-hidden">
+    <section id="home" aria-label="Introduction" className="relative pt-28 pb-10 lg:pt-32 lg:pb-16 overflow-hidden">
+
       {/* Ambient background blobs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
@@ -139,6 +162,40 @@ export function Hero() {
                 height={900}
                 className="absolute right-0 bottom-0 h-[95%] w-auto max-w-none object-contain object-bottom drop-shadow-2xl"
               />
+
+              {/* Image edit controls */}
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                onChange={onPick}
+                className="sr-only"
+                aria-label="Upload new profile photo"
+              />
+              <div className="absolute right-3 bottom-3 flex gap-2 z-10">
+                <Button
+                  type="button"
+                  size="icon"
+                  onClick={() => fileRef.current?.click()}
+                  className="h-10 w-10 rounded-full bg-primary text-primary-foreground shadow-elegant hover:opacity-90"
+                  aria-label="Change profile photo"
+                  title="Change profile photo"
+                >
+                  <Camera className="h-4 w-4" />
+                </Button>
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="outline"
+                  onClick={reset}
+                  className="h-10 w-10 rounded-full bg-card shadow-card"
+                  aria-label="Reset profile photo"
+                  title="Reset to default"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
+              </div>
+
 
               {/* floating stat card */}
               <div className="absolute left-0 sm:left-4 top-1/2 -translate-y-6 bg-card border border-border rounded-xl px-5 py-4 shadow-card animate-float">
