@@ -1,8 +1,9 @@
-import { ArrowUpRight, Atom, Camera, Code2, Lightbulb, RotateCcw, Search, Sparkles, Trophy } from "lucide-react";
+import { ArrowUpRight, Atom, Camera, Code2, FileDown, Lightbulb, RotateCcw, Search, Sparkles, Trophy } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfileImage } from "@/hooks/use-profile-image";
+import cvAsset from "@/assets/cv.pdf.asset.json";
 
 
 const roles = [
@@ -104,7 +105,7 @@ export function Hero() {
                 algorithms, and meaningful impact.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-3">
                 <Button
                   asChild
                   size="lg"
@@ -122,6 +123,22 @@ export function Hero() {
                   className="rounded-xl border-2 border-primary text-foreground hover:bg-primary/5 px-7 h-12"
                 >
                   <a href="#about">Know More</a>
+                </Button>
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="lg"
+                  className="rounded-xl border border-border hover:bg-accent px-5 h-12"
+                >
+                  <a
+                    href={cvAsset.url}
+                    download="Md_Sohel_Parvez_CV.pdf"
+                    aria-label="Download CV / Resume (PDF)"
+                    rel="noopener noreferrer"
+                  >
+                    <FileDown className="mr-1.5 h-4 w-4" aria-hidden />
+                    CV
+                  </a>
                 </Button>
               </div>
 

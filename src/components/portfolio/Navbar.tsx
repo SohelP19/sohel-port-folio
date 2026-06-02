@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, FileDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import cvAsset from "@/assets/cv.pdf.asset.json";
+
 
 const links = [
   { id: "about", label: "About" },
@@ -110,6 +112,17 @@ export function Navbar() {
           >
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
+          <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex rounded-lg border border-border hover:bg-accent">
+            <a
+              href={cvAsset.url}
+              download="Md_Sohel_Parvez_CV.pdf"
+              aria-label="Download CV / Resume (PDF)"
+              rel="noopener noreferrer"
+            >
+              <FileDown className="mr-1.5 h-4 w-4" aria-hidden />
+              CV
+            </a>
+          </Button>
           <Button asChild className="hidden md:inline-flex bg-primary-gradient text-primary-foreground shadow-elegant hover:opacity-90">
             <a href="#contact" onClick={(e) => handleNav(e, "contact")}>Hire Me</a>
           </Button>
@@ -149,6 +162,22 @@ export function Navbar() {
               );
             })}
           </ul>
+          <div className="px-6 py-4 border-t border-border flex flex-col gap-2">
+            <Button asChild variant="outline" size="sm" className="w-full rounded-lg justify-center">
+              <a
+                href={cvAsset.url}
+                download="Md_Sohel_Parvez_CV.pdf"
+                aria-label="Download CV / Resume (PDF)"
+                rel="noopener noreferrer"
+              >
+                <FileDown className="mr-1.5 h-4 w-4" aria-hidden />
+                Download CV
+              </a>
+            </Button>
+            <Button asChild className="w-full bg-primary-gradient text-primary-foreground shadow-elegant hover:opacity-90">
+              <a href="#contact" onClick={(e) => handleNav(e, "contact")}>Hire Me</a>
+            </Button>
+          </div>
         </div>
       )}
     </header>

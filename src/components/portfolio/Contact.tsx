@@ -1,10 +1,11 @@
-import { Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { FileDown, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { Section } from "./Section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import cvAsset from "@/assets/cv.pdf.asset.json";
 
 export function Contact() {
   const [sending, setSending] = useState(false);
@@ -62,6 +63,26 @@ export function Contact() {
               </div>
             </a>
           ))}
+          <Button
+            asChild
+            variant="outline"
+            className="w-full rounded-2xl border-border hover:bg-accent h-12 justify-start px-4"
+          >
+            <a
+              href={cvAsset.url}
+              download="Md_Sohel_Parvez_CV.pdf"
+              aria-label="Download CV / Resume (PDF)"
+              rel="noopener noreferrer"
+            >
+              <span className="h-11 w-11 rounded-xl bg-primary-gradient flex items-center justify-center text-primary-foreground shrink-0 -ml-1 mr-3">
+                <FileDown className="h-5 w-5" aria-hidden />
+              </span>
+              <div>
+                <p className="text-xs text-muted-foreground">Resume</p>
+                <p className="font-medium text-sm">Download CV</p>
+              </div>
+            </a>
+          </Button>
         </div>
 
         <form
