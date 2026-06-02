@@ -112,6 +112,17 @@ export function Navbar() {
           >
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
+          <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex rounded-lg border border-border hover:bg-accent">
+            <a
+              href={cvAsset.url}
+              download="Md_Sohel_Parvez_CV.pdf"
+              aria-label="Download CV / Resume (PDF)"
+              rel="noopener noreferrer"
+            >
+              <FileDown className="mr-1.5 h-4 w-4" aria-hidden />
+              CV
+            </a>
+          </Button>
           <Button asChild className="hidden md:inline-flex bg-primary-gradient text-primary-foreground shadow-elegant hover:opacity-90">
             <a href="#contact" onClick={(e) => handleNav(e, "contact")}>Hire Me</a>
           </Button>
