@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, FileDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import cvAsset from "@/assets/cv.pdf.asset.json";
+
 
 const links = [
   { id: "about", label: "About" },
