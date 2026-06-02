@@ -1,8 +1,9 @@
-import { ArrowUpRight, Atom, Camera, Code2, Lightbulb, RotateCcw, Search, Sparkles, Trophy } from "lucide-react";
+import { ArrowUpRight, Atom, Camera, Code2, FileDown, Lightbulb, RotateCcw, Search, Sparkles, Trophy } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfileImage } from "@/hooks/use-profile-image";
+import cvAsset from "@/assets/cv.pdf.asset.json";
 
 
 const roles = [
