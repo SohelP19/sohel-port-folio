@@ -1,10 +1,11 @@
-import { Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { FileDown, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { Section } from "./Section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import cvAsset from "@/assets/cv.pdf.asset.json";
 
 export function Contact() {
   const [sending, setSending] = useState(false);
