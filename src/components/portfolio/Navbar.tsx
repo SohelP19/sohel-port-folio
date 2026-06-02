@@ -161,6 +161,7 @@ export function Navbar() {
                 </li>
               );
             })}
+          </ul>
           <div className="px-6 py-4 border-t border-border flex flex-col gap-2">
             <Button asChild variant="outline" size="sm" className="w-full rounded-lg justify-center">
               <a
