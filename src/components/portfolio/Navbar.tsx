@@ -161,7 +161,22 @@ export function Navbar() {
                 </li>
               );
             })}
-          </ul>
+          <div className="px-6 py-4 border-t border-border flex flex-col gap-2">
+            <Button asChild variant="outline" size="sm" className="w-full rounded-lg justify-center">
+              <a
+                href={cvAsset.url}
+                download="Md_Sohel_Parvez_CV.pdf"
+                aria-label="Download CV / Resume (PDF)"
+                rel="noopener noreferrer"
+              >
+                <FileDown className="mr-1.5 h-4 w-4" aria-hidden />
+                Download CV
+              </a>
+            </Button>
+            <Button asChild className="w-full bg-primary-gradient text-primary-foreground shadow-elegant hover:opacity-90">
+              <a href="#contact" onClick={(e) => handleNav(e, "contact")}>Hire Me</a>
+            </Button>
+          </div>
         </div>
       )}
     </header>
