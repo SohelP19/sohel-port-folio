@@ -28,7 +28,7 @@ export function About() {
       id="about"
       eyebrow="About Me"
       title="A Computer Science student with a leader's mindset."
-      description="I analyze complex technical concepts, design logical solutions, and apply theoretical knowledge to real-world problems — while leading teams and events along the way."
+      description="I analyze complex technical concepts, design logical solutions, and apply theoretical knowledge to real-world problems - while leading teams and events along the way."
     >
       <div className="grid lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2 space-y-6 text-muted-foreground leading-relaxed">
@@ -41,7 +41,7 @@ export function About() {
           <p>
             Beyond academics, I take initiative in group settings, guide peers toward shared goals,
             and make sound decisions under pressure. My goal is to build a professional career in
-            software or systems development — where technical depth, critical thinking, and
+            software or systems development - where technical depth, critical thinking, and
             effective leadership drive meaningful results.
           </p>
 
