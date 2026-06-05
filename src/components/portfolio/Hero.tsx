@@ -147,8 +147,8 @@ export function Hero() {
                   <Atom className="h-5 w-5" />
                 </div>
                 <p className="text-sm text-muted-foreground leading-snug max-w-xs">
-                  CSE Student &amp; Aspiring Software /
-                  <br className="hidden sm:block" /> Systems Professional.
+                  CSE Student & Aspiring Software /
+                  <br className="hidden sm:block" /> Systems Professional | AI Enthusiast
                 </p>
               </div>
             </div>
