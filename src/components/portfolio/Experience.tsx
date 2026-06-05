@@ -5,7 +5,7 @@ const items = [
   {
     role: "Junior SEO Executive",
     org: "DigiBit LLC",
-    period: "Aug 2026 – Present",
+    period: "Aug 2024 – Present",
     points: [
       "Search engine optimization and on-page strategy",
       "Website performance analysis and audits",
