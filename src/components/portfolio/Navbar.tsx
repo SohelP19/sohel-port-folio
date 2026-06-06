@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { useTheme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import cvAsset from "@/assets/cv.pdf.asset.json";
+
+
+const cvUrl = "/Md_Sohel_Parvez_CV.pdf";
 
 
 const links = [
@@ -114,7 +116,7 @@ export function Navbar() {
           </Button>
           <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex rounded-lg border border-border hover:bg-accent">
             <a
-              href={cvAsset.url}
+              href={cvUrl}
               download="Md_Sohel_Parvez_CV.pdf"
               aria-label="Download CV / Resume (PDF)"
               rel="noopener noreferrer"
@@ -165,7 +167,7 @@ export function Navbar() {
           <div className="px-6 py-4 border-t border-border flex flex-col gap-2">
             <Button asChild variant="outline" size="sm" className="w-full rounded-lg justify-center">
               <a
-                href={cvAsset.url}
+                href={cvUrl}
                 download="Md_Sohel_Parvez_CV.pdf"
                 aria-label="Download CV / Resume (PDF)"
                 rel="noopener noreferrer"
