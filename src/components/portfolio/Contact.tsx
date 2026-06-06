@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import cvAsset from "@/assets/cv.pdf.asset.json";
+
+
+const cvUrl = "/Md_Sohel_Parvez_CV.pdf";
 
 export function Contact() {
   const [sending, setSending] = useState(false);
@@ -69,7 +71,7 @@ export function Contact() {
             className="w-full rounded-2xl border-border hover:bg-accent h-12 justify-start px-4"
           >
             <a
-              href={cvAsset.url}
+              href={cvUrl}
               download="Md_Sohel_Parvez_CV.pdf"
               aria-label="Download CV / Resume (PDF)"
               rel="noopener noreferrer"

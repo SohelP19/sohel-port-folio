@@ -3,7 +3,9 @@ import { useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfileImage } from "@/hooks/use-profile-image";
-import cvAsset from "@/assets/cv.pdf.asset.json";
+
+
+const cvUrl = "/Md_Sohel_Parvez_CV.pdf";
 
 
 const roles = [
@@ -131,7 +133,7 @@ export function Hero() {
                   className="rounded-xl border border-border hover:bg-accent px-5 h-12"
                 >
                   <a
-                    href={cvAsset.url}
+                    href={cvUrl}
                     download="Md_Sohel_Parvez_CV.pdf"
                     aria-label="Download CV / Resume (PDF)"
                     rel="noopener noreferrer"
