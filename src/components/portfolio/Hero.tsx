@@ -38,6 +38,7 @@ const marquee = [
 
 export function Hero() {
   const { src: profile, update, reset } = useProfileImage();
+  const { isOwner } = useOwnerMode();
   const fileRef = useRef<HTMLInputElement>(null);
 
   const onPick = async (e: React.ChangeEvent<HTMLInputElement>) => {
