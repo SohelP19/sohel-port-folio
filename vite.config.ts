@@ -9,17 +9,18 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 const githubRepository = process.env.GITHUB_REPOSITORY?.split("/")[1];
 const isGitHubPagesBuild = process.env.GITHUB_ACTIONS === "true" && !!githubRepository;
 
+// Prerender to static HTML only during the GitHub Pages build. In the Lovable
+// sandbox, nitro is force-enabled and emits `dist/server/index.mjs`, which is
+// incompatible with TanStack's preview-server plugin (it expects `server.js`)
+// and breaks prerender. Skipping prerender in sandbox keeps preview working.
+const enablePrerender = isGitHubPagesBuild;
+
 export default defineConfig({
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-    prerender: {
-      enabled: true,
-      autoStaticPathsDiscovery: false,
-      failOnError: true,
-    },
-    pages: [{ path: "/", prerender: { crawlLinks: false } }],
+    prerender: enablePrerender
+      ? { enabled: true, autoStaticPathsDiscovery: false, failOnError: true }
+      : undefined,
+    pages: enablePrerender ? [{ path: "/", prerender: { crawlLinks: false } }] : undefined,
     router: isGitHubPagesBuild && githubRepository ? { basepath: githubRepository } : {},
   },
   vite: {
