@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfileImage } from "@/hooks/use-profile-image";
+import { useOwnerMode } from "@/hooks/use-owner-mode";
 
 
 const cvUrl = "/Md_Sohel_Parvez_CV.pdf";
