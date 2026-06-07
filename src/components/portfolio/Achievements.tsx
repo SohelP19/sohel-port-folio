@@ -24,20 +24,28 @@ function AchievementCard({ id, icon: Icon, title, desc }: ItemProps) {
   const onPick = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const ok = file.type.startsWith("image/") || file.type === "application/pdf";
-    if (!ok) {
-      toast.error("Upload an image or PDF certificate.");
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"];
+    const isAllowedType = allowedTypes.includes(file.type);
+    if (!isAllowedType) {
+      toast.error(`Invalid file type: "${file.type || "unknown"}". Please upload an image (JPG, PNG, WEBP, GIF) or PDF.`);
+      e.target.value = "";
       return;
     }
-    if (file.size > 4 * 1024 * 1024) {
-      toast.error("File must be under 4MB.");
+
+    const maxSize = 4 * 1024 * 1024; // 4 MB
+    if (file.size > maxSize) {
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      toast.error(`File is too large (${sizeMB} MB). Maximum allowed size is 4 MB.`);
+      e.target.value = "";
       return;
     }
+
     try {
       await update(file);
-      toast.success("Certificate uploaded");
+      toast.success(`"${file.name}" uploaded successfully.`);
     } catch {
-      toast.error("Couldn't save — storage full?");
+      toast.error("Failed to save the file. Local storage may be full.");
     }
     e.target.value = "";
   };
