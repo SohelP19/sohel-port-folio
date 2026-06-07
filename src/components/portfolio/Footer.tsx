@@ -1,4 +1,5 @@
 import { Linkedin, Mail, Phone } from "lucide-react";
+import { OwnerLock } from "./OwnerLock";
 
 export function Footer() {
   return (
@@ -17,8 +18,10 @@ export function Footer() {
           <a href="tel:+8801797362701" aria-label="Phone" className="text-muted-foreground hover:text-primary transition-colors">
             <Phone className="h-4 w-4" />
           </a>
+          <OwnerLock />
         </div>
       </div>
     </footer>
   );
 }
+

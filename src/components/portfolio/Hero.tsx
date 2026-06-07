@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfileImage } from "@/hooks/use-profile-image";
+import { useOwnerMode } from "@/hooks/use-owner-mode";
 
 
 const cvUrl = "/Md_Sohel_Parvez_CV.pdf";
@@ -37,6 +38,7 @@ const marquee = [
 
 export function Hero() {
   const { src: profile, update, reset } = useProfileImage();
+  const { isOwner } = useOwnerMode();
   const fileRef = useRef<HTMLInputElement>(null);
 
   const onPick = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,38 +184,42 @@ export function Hero() {
                 className="absolute right-0 bottom-0 h-[95%] w-auto max-w-none object-contain object-bottom drop-shadow-2xl"
               />
 
-              {/* Image edit controls */}
-              <input
-                ref={fileRef}
-                type="file"
-                accept="image/*"
-                onChange={onPick}
-                className="sr-only"
-                aria-label="Upload new profile photo"
-              />
-              <div className="absolute right-3 bottom-3 flex gap-2 z-10">
-                <Button
-                  type="button"
-                  size="icon"
-                  onClick={() => fileRef.current?.click()}
-                  className="h-10 w-10 rounded-full bg-primary text-primary-foreground shadow-elegant hover:opacity-90"
-                  aria-label="Change profile photo"
-                  title="Change profile photo"
-                >
-                  <Camera className="h-4 w-4" />
-                </Button>
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="outline"
-                  onClick={reset}
-                  className="h-10 w-10 rounded-full bg-card shadow-card"
-                  aria-label="Reset profile photo"
-                  title="Reset to default"
-                >
-                  <RotateCcw className="h-4 w-4" />
-                </Button>
-              </div>
+              {/* Image edit controls — owner only */}
+              {isOwner && (
+                <>
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={onPick}
+                    className="sr-only"
+                    aria-label="Upload new profile photo"
+                  />
+                  <div className="absolute right-3 bottom-3 flex gap-2 z-10">
+                    <Button
+                      type="button"
+                      size="icon"
+                      onClick={() => fileRef.current?.click()}
+                      className="h-10 w-10 rounded-full bg-primary text-primary-foreground shadow-elegant hover:opacity-90"
+                      aria-label="Change profile photo"
+                      title="Change profile photo"
+                    >
+                      <Camera className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="outline"
+                      onClick={reset}
+                      className="h-10 w-10 rounded-full bg-card shadow-card"
+                      aria-label="Reset profile photo"
+                      title="Reset to default"
+                    >
+                      <RotateCcw className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </>
+              )}
 
 
               {/* floating stat card */}
