@@ -2,88 +2,62 @@ import { useState } from "react";
 import { Lock, LockOpen } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { useOwnerMode } from "@/hooks/use-owner-mode";
+import { OWNER_EMAIL } from "@/lib/owner-config";
 
 export function OwnerLock() {
-  const { isOwner, unlock, lock } = useOwnerMode();
-  const [open, setOpen] = useState(false);
-  const [passcode, setPasscode] = useState("");
+  const { isOwner, isSignedIn, email, unlock, lock } = useOwnerMode();
+  const [busy, setBusy] = useState(false);
 
-  const handleClick = () => {
-    if (isOwner) {
-      lock();
-      toast.success("Owner mode locked");
-    } else {
-      setOpen(true);
+  const handleClick = async () => {
+    if (busy) return;
+    setBusy(true);
+    try {
+      if (isOwner || isSignedIn) {
+        await lock();
+        toast.success("Signed out");
+      } else {
+        await unlock();
+        // page may redirect to Google; nothing else to do here
+      }
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Sign-in failed");
+    } finally {
+      setBusy(false);
     }
   };
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (unlock(passcode)) {
-      toast.success("Owner mode unlocked");
-      setOpen(false);
-      setPasscode("");
-    } else {
-      toast.error("Wrong passcode");
-    }
-  };
+  // Signed in but not the owner email — show a "not authorized" hint
+  const wrongAccount = isSignedIn && !isOwner;
 
   return (
-    <>
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={handleClick}
-        className="rounded-full"
-        aria-label={isOwner ? "Lock owner mode" : "Unlock owner mode"}
-        title={isOwner ? "Owner mode active — click to lock" : "Owner mode"}
-      >
-        {isOwner ? (
-          <>
-            <LockOpen className="h-3.5 w-3.5 mr-1.5" />
-            Owner
-          </>
-        ) : (
-          <>
-            <Lock className="h-3.5 w-3.5 mr-1.5" />
-            Owner
-          </>
-        )}
-      </Button>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Enter owner passcode</DialogTitle>
-            <DialogDescription>
-              Only the owner can edit images and upload certificates.
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={submit} className="space-y-4">
-            <Input
-              type="password"
-              autoFocus
-              value={passcode}
-              onChange={(e) => setPasscode(e.target.value)}
-              placeholder="Passcode"
-            />
-            <DialogFooter>
-              <Button type="submit">Unlock</Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
-    </>
+    <Button
+      type="button"
+      variant="outline"
+      size="sm"
+      onClick={handleClick}
+      disabled={busy}
+      className="rounded-full"
+      aria-label={isOwner ? "Sign out of owner mode" : "Sign in as owner"}
+      title={
+        isOwner
+          ? `Owner mode (${email}) — click to sign out`
+          : wrongAccount
+            ? `Signed in as ${email}. Owner is ${OWNER_EMAIL}. Click to sign out.`
+            : "Sign in with Google as the site owner"
+      }
+    >
+      {isOwner ? (
+        <>
+          <LockOpen className="h-3.5 w-3.5 mr-1.5" />
+          Owner
+        </>
+      ) : (
+        <>
+          <Lock className="h-3.5 w-3.5 mr-1.5" />
+          {wrongAccount ? "Sign out" : "Owner"}
+        </>
+      )}
+    </Button>
   );
 }

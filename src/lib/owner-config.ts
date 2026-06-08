@@ -1,5 +1,7 @@
-// Owner passcode for unlocking edit mode on this portfolio.
-// Change this to your own secret. Anyone who knows it can edit images
-// and attachments on their own browser. (Images stay in that browser's
-// localStorage — for cross-visitor persistence, enable Lovable Cloud.)
-export const OWNER_PASSCODE = "sohel-owner-2026";
+// Email of the owner. Only the user signed in (via Google) with this email
+// can upload or edit images, certificates, and other shared media.
+// Change this if you transfer ownership.
+export const OWNER_EMAIL = "sohelparvez1911@gmail.com";
+
+// Shared storage bucket for portfolio media.
+export const MEDIA_BUCKET = "portfolio-media";
