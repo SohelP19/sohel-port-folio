@@ -14,13 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      site_assets: {
+        Row: {
+          key: string
+          mime: string | null
+          name: string | null
+          path: string
+          updated_at: string
+        }
+        Insert: {
+          key: string
+          mime?: string | null
+          name?: string | null
+          path: string
+          updated_at?: string
+        }
+        Update: {
+          key?: string
+          mime?: string | null
+          name?: string | null
+          path?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_site_owner: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
