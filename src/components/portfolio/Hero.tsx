@@ -46,14 +46,20 @@ export function Hero() {
     if (!file) return;
     if (!file.type.startsWith("image/")) {
       toast.error("Please choose an image file.");
+      e.target.value = "";
       return;
     }
     if (file.size > 4 * 1024 * 1024) {
       toast.error("Image must be under 4MB.");
+      e.target.value = "";
       return;
     }
-    await update(file);
-    toast.success("Profile photo updated");
+    try {
+      await update(file);
+      toast.success("Profile photo updated");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    }
     e.target.value = "";
   };
 

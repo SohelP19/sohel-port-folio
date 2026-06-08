@@ -64,8 +64,8 @@ function LeadershipItem({ item }: { item: Item }) {
     try {
       await update(file);
       toast.success(`"${file.name}" uploaded successfully.`);
-    } catch {
-      toast.error("Failed to save the file. Local storage may be full.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to upload the file.");
     }
     e.target.value = "";
   };
